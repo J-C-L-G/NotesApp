@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Notes App</title>
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href="styles/Notes.css?" rel="stylesheet" />
+</head>
+<body>
+<!-- Navigation Menu starts here -->
+    <ul class="mainMenu">
+       <li><input id="createNote" type="image" src="images/createNote.png" value="Create Note"  title="Create Note"  /></li>
+        <li><input id="searchInfo" type="text" /> <input id="searchNote" type="image" src="images/searchNote.png" value="Search Note"  title="Search Note"  /></li>
+    </ul>
+<!-- Navigation Menu ends here -->
+
+<!-- Board field starts here -->
+    <div id="boardWindow" class="board">
+
+        <!-- Notes controls starts here -->
+        <div id="newNoteWindow" class="newNote">
+            <div class="formNote">
+                <label id="errorMessage" class="errorMessage">Please provide a title and message</label>
+                <label>Title</label>
+                <input id="newTitleNoteWindow" type="text" name="title" required="required" />
+                <label>Message</label>
+                <textarea id="newMessageNoteWindow" name="comments"  required="required"></textarea>
+                <div class="formControls">
+                    <input id="deleteNote" type="image" src="images/cancelNote.png" value="Delete Note"  title="Delete Note"  />
+                    <input id="addNote" type="image" src="images/addNote.png" value="Add Note"  title="Add Note"  />
+                </div>
+            </div>
+        </div>
+        <!-- Notes controls ends here -->
+
+        <!-- Recycle bin here -->
+        <bin id="recycleBin" class="recycleBin" draggable="true"></bin>
+
+        <!-- Sticky Notes should be added here -->
+
+    </div>
+<!-- Board field ends here -->
+
+<!-- ..:: Load my Scripts ::.. -->
+<script src="scripts/dataManager.js"></script>
+<script src="scripts/utilities.js"></script>
+<script src="scripts/handlers.js"></script>
+<script type="application/javascript">
+    window.onload = function() {
+        (function initialize(){
+            //Obtain the elements from the DOM
+            var body = document.getElementsByTagName('body')[0];
+            body.addEventListener("dragstart", dragStart);
+            body.addEventListener("dragover", dragOver);
+            body.addEventListener("dragend", dragEnd);
+            body.addEventListener("drop", drop);
+            body.addEventListener("click", clickHandler, false);
+            body.addEventListener("keyup", keyUp, false);
+            body.addEventListener("dblclick", dblClick, false);
+            calculateBoard();
+            localStorageManager.buildUI();
+        })();
+    };
+</script>
+<!-- ..:: Load my Scripts ::.. -->
+</body>
+</html>
