@@ -64,16 +64,27 @@ module.exports = function (grunt){
             }
         },
         uglify : {
+            js : {
+                files: {
+                    '<%= BuildFolder.js %>/bundle.min.js': ['<%= BuildFolder.js %>/bundle.js']
+                }
+            }
+        },
+        cssmin : {
+            options : {
+                shorthandCompacting : false,
+                roundingPrecision : -1
+            },
             target : {
                 files : {
-                    '<%= BuildFolder.js %>/bundle.min.js':['<%= BuildFolder.js %>/bundle.js']
+                    '<%= BuildFolder.css %>/styles.min.css' : ['<%= SrcFolder.css %>**/*.css']
                 }
             }
         },
         watch:{
             css : {
                 files : '<%= SrcFolder.css %>**/*.css',
-                tasks : ['copy:css']
+                tasks : ['sprite', 'cssmin', 'clean:bundle']
             },
             js : {
                 files : '<%= SrcFolder.js %>**/*.js',
@@ -93,9 +104,10 @@ module.exports = function (grunt){
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-spritesmith');
 
     //Define grunt tasks
-    grunt.registerTask('default',['clean:all','htmlmin', 'browserify', 'sprite','copy', 'uglify', 'clean:bundle', 'watch']);
+    grunt.registerTask('default',['clean:all','htmlmin', 'browserify', 'sprite','copy:images' , 'cssmin', 'uglify', 'clean:bundle','watch']);
 };
