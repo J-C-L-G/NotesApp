@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Notes App</title>
+    <link href="assets/css/styles.min.css?" rel="stylesheet" />
+</head>
+<body class="icon-board">
+<!-- Navigation Menu starts here -->
+    <ul class="mainMenu">
+       <li>
+           <div type="image" id="createNote" class="icon-createNote" ></div>
+       </li>
+       <li>
+           <input id="searchInfo" class="inputForSearch" type="text" />
+           <div type="image" id="searchNote" class="icon-searchNote" ></div>
+       </li>
+    </ul>
+
+<!-- Navigation Menu ends here -->
+
+<!-- Board field starts here -->
+    <div id="boardWindow" class="board">
+
+        <!-- Notes controls starts here -->
+        <div id="newNoteWindow" class="newNote">
+            <div class="formNote">
+                <label id="errorMessage" class="errorMessage">Please provide a title and message</label>
+                <label>Title</label>
+                <input id="newTitleNoteWindow" class="noteTitleInput" type="text" name="title" required="required" />
+                <label>Message</label>
+                <textarea id="newMessageNoteWindow" name="comments"  required="required"></textarea>
+                <div class="formControls">
+                    <div id="deleteNote" class="icon-cancelNote"></div>
+                    <div id="addNote" class="icon-addNote"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Notes controls ends here -->
+
+        <!-- Recycle bin here -->
+        <bin id="recycleBin" class="icon-recycle recycleBin" draggable="true"></bin>
+
+        <!-- Sticky Notes should be added here -->
+
+    </div>
+<!-- Board field ends here -->
+
+<!-- ..:: Load my Scripts ::.. -->
+<script type="application/javascript" src="assets/js/bundle.min.js"></script>
+<!-- ..:: Load my Scripts ::.. -->
+</body>
+</html>
