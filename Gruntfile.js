@@ -23,7 +23,7 @@ module.exports = function (grunt){
         /*** ..:: Task(s) ::..***/
         clean : {
             all : ['<%= BuildFolder.root %>'],
-            bundle : ['<%= BuildFolder.js %>/bundle.js']
+            bundle : ['<%= BuildFolder.js %>/bundle.js','<%= SrcFolder.css%>/sprites.css']
         },
         browserify : {
             bundle : {
