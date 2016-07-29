@@ -1,0 +1,6 @@
+{
+  "name": "NotesApp",
+  "tagline": "Online Application to store notes on your browser!",
+  "body": "# Welcome to WebNotes.\r\nSimple web application to create and store notes in your browser!\r\n\r\n##Controls\r\n**Creating Notes**\r\n\r\n\r\n1. Click on the \"Create Note\" button and provide a title and message.\r\n\r\n***\r\n\r\n**Deleting Notes**\r\n\r\n\r\n1. Drag the Note that you want to delete and drop it into the trashcan.\r\n\r\n***\r\n\r\n**Search for content**\r\n\r\n\r\n1. Write what you are searching for and click \"Search\".\r\n2. Once done clean the search field and click \"Search\" again to bring all the notes again.\r\n\r\n***\r\n\r\n**Re-Arranging the Notes**\r\n\r\n\r\n1. Drag and Drop, Simple!.\r\n\r\n***\r\n## Authors and Contributors\r\nCarlos Ledezma (@J-C-L-G).",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
