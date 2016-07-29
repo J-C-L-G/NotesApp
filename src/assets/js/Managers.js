@@ -2,6 +2,8 @@
  * Created by JCLG on 8/28/2015.
  */
 
+var Handlers = require('./Handlers');
+
 //Central Storage for cache the elements and control the application data.
 var dataManager = {
     elementBeingDragged : null,
@@ -19,6 +21,13 @@ var dataManager = {
     }
 };
 
+//Create the fomat for the note date
+function getDateFormat(){
+    var regex = /([\S\s]+\d\d:\d\d)/;
+    var date = ""+new Date();
+    return date.match(regex)[0];
+}
+
 //Initialize Calculate the board boundary to stick the notes
 function calculateBoard(){
     var boardWindow = dataManager.getElementById('boardWindow');
@@ -26,6 +35,8 @@ function calculateBoard(){
     var maxHeight = window.getComputedStyle(boardWindow)['height'];
     dataManager.maxWidth = parseFloat(maxWidth.substr(0, maxWidth.length - 2));
     dataManager.maxHeight = parseFloat(maxHeight.substr(0, maxHeight.length - 2));
+    console.log('maxWidth',dataManager.maxWidth);
+    console.log('maxHeight',dataManager.maxHeight);
 }
 
 //function increaseBoard for every 10 notes
@@ -70,7 +81,6 @@ var noteManager = {
         note.setAttribute('class', 'stickyNote');
         note.setAttribute('id', noteId);
         note.setAttribute('draggable', "true");
-        note.setAttribute('contenteditable', "true");
         note.appendChild(extraInfo);
         note.appendChild(labelTitle);
         note.appendChild(labelMessage);
@@ -127,7 +137,6 @@ var localStorageManager = {
             var boardWindow = dataManager.getElementById('boardWindow');
             boardWindow.appendChild(parent);
             var note = parent.firstChild;
-            note.onblur = blur;
             note.style.visibility = "visible";
             boardWindow.removeChild(parent);
             noteManager.addNoteToBoard(note);
@@ -144,9 +153,18 @@ var localStorageManager = {
         var allNotes = document.getElementsByTagName('note');
         for(var note = 0 ; note < allNotes.length ; note++){
                 allNotes[note].style.visibility = "hidden";
-                if(allNotes[note].innerHTML.lastIndexOf(filterContent) > -1){
+                if(allNotes[note].innerHTML.indexOf(filterContent) > -1){
                     allNotes[note].style.visibility = "visible";
                 }
         }
     }
+};
+
+/*Public API*/
+module.exports = {
+    getDateFormat : getDateFormat,
+    calculateBoard : calculateBoard,
+    dataManager : dataManager,
+    noteManager : noteManager,
+    localStorageManager : localStorageManager
 };

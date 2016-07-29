@@ -2,6 +2,22 @@
  * Created by JCLG on 8/28/2015.
  */
 
+var Managers = require('./Managers'),
+    dataManager = Managers.dataManager,
+    localStorageManager = Managers.localStorageManager,
+    noteManager = Managers.noteManager,
+    getDateFormat = Managers.getDateFormat;
+
+var Utilities = require('./Utilities'),
+    clearNoteForm = Utilities.clearNoteForm,
+    hideNoteForm = Utilities.hideNoteForm,
+    validateForm = Utilities.validateForm,
+    showNoteForm = Utilities.showNoteForm,
+    validateElement = Utilities.validateElement,
+    removeClass = Utilities.removeClass,
+    validateBoundaries = Utilities.validateBoundaries;
+
+
 //Utility function to attach handlers on new/old browsers
 function addEventHandler(type, fn, elem){
     if (document.addEventListener) {
@@ -11,14 +27,6 @@ function addEventHandler(type, fn, elem){
         elem.attachEvent("on" + type, data.dispatcher);
     }
 }
-/*
- addEventHandler("click", clickHandler, body);
- addEventHandler("drag", drag, body);
- addEventHandler("dragend", dragEnd, body);
- addEventHandler("dragover", dragOver, body);
- addEventHandler("drop", drop, body);
- */
-
 
 /***************************  Click Handler   *********************************/
 
@@ -57,7 +65,7 @@ function clickHandler(ev) {
 function dragStart(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
     dataManager.elementBeingDragged = dataManager.getElementById(ev.target.id);
-    dataManager.elementBeingDragged.style.opacity = '0';
+    dataManager.elementBeingDragged.style.opacity = '1';
     console.log(dataManager.elementBeingDragged);
     if(dataManager.elementBeingDragged) {
         validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
@@ -76,12 +84,12 @@ function dragOver(ev) {
 function dragEnd(ev) {
     if(dataManager.elementBeingDragged) {
         dataManager.elementBeingDragged.style.opacity = '1';
-        validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
+//        validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
         if(validateElement(dataManager.elementBeingDragged,'stickyNote')) {
             noteManager.addNoteToStorage(dataManager.elementBeingDragged);
         }
     }
-    console.log("dragover");
+    console.log("dragend");
 }
 
 function drop(ev) {
@@ -94,6 +102,8 @@ function drop(ev) {
         noteManager.deleteNoteFromStorage(dataManager.elementBeingDragged);
         dataManager.elementBeingDragged.onblur = null;
         dataManager.elementBeingDragged = null;
+    }else{
+        validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
     }
     console.log("drop");
 }
@@ -116,20 +126,28 @@ function drop(ev) {
 function dblClick(ev){
     var element = dataManager.getElementById(ev.target.id);
     if(validateElement(element,'stickyNote')){
-        element.setAttribute('contenteditable', "true");
-        var currentClass = element.getAttribute('class') + " editMode";
-        element.setAttribute('class', currentClass);
-    }
-    //console.log('dblClick');
-}
-
-function blur(ev){
-    var element = dataManager.getElementById(ev.target.id);
-    if(validateElement(element,'stickyNote')){
-        element.setAttribute('contenteditable', "false");
-        element.setAttribute('class', removeClass(element,"editMode"));
+        if(element.className.indexOf('editMode') > 0){
+            element.setAttribute('contenteditable', "false");
+            element.setAttribute('class', removeClass(element,"editMode"));
+        }else{
+            element.setAttribute('contenteditable', "true");
+            var currentClass = element.getAttribute('class') + " editMode";
+            element.setAttribute('class', currentClass);
+        }
         noteManager.addNoteToStorage(element);
     }
-    //console.log('blur');
+    console.log('dblClick');
 }
 
+
+/*Public API*/
+module.exports = {
+    addEventHandler : addEventHandler,
+    clickHandler : clickHandler,
+    dragStart : dragStart,
+    dragOver : dragOver,
+    dragEnd : dragEnd,
+    drop : drop,
+    keyUp : keyUp,
+    dblClick : dblClick
+};

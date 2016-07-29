@@ -1,20 +1,19 @@
 /*--------------------- Styles for the main page ------------------- */
 *{box-sizing: border-box;}
-html{height: 100%;
+*:focus {
+    outline: none;
+}
+html{
+    height: 100%;
     padding: 0;
     margin: 0;
     background: url(../images/board.png) repeat top left;
-    /*
-    background-image: url(../images/boardCorner.png),
-                      url(../images/board.png);
-    background-repeat: no-repeat,repeat;
-    background-position: bottom right,top left;
-    */
-    }
+}
 
 body{
     height: 95%;
-    margin:0;}
+    margin:0;
+}
 
 /*--------------------- Styles for the nav menu ------------------- */
 .mainMenu{
@@ -37,21 +36,23 @@ body{
 .mainMenu li{
     display: inline-block;
     vertical-align: top;
-    height: 65px;
+    height: 60px;
+    width: 60px;
     margin-right: 2em;
-    color: white;
+    color: #000000;
 }
 
 .mainMenu input[type="image"]{
     outline: none;
+    outline-color: #000000;
 }
 
-.mainMenu input[type="text"]{
-    margin-right: .5em;
-    width: 200px;
-    height: 32px;
-    vertical-align: 100%;
+.inputForSearch{
+    margin-right: 1em;
+    width: 70%;
+    height: 32px ;
     font-size: 1.2em;
+    vertical-align: 100%;
 }
 
 .mainMenu input[type="text"]:focus{
@@ -60,14 +61,12 @@ body{
 
 .mainMenu li:last-child{
     float: right;
-    /*background: url(../images/pageNote.png) no-repeat;*/
-    /*padding-left: 70px;*/
-    vertical-align: baseline;
+    vertical-align: middle;
+    width: 300px;
 }
 
 .mainMenu li:last-child div{
-    position: relative;
-    top: 30%;
+    display: inline-block;
 }
 
 /*--------------------- Styles for board div ------------------- */
@@ -88,9 +87,6 @@ body{
     padding: 1em;
     width: 100px;
     height: 100px;
-    background-image: url(../images/recycle.png);
-    background-repeat: no-repeat;
-    background-position: center center;
     -webkit-transition: transform .5s;
     -moz-transition: transform .5s;
     -o-transition: transform .5s;
@@ -157,9 +153,6 @@ body{
     -ms-transform: scale(1.1);
     transform: scale(1.1);
     cursor: pointer;
-    background-image: url(../images/corner.png);
-    background-repeat: no-repeat;
-    background-position: bottom right;
 }
 
 .stickyNote label{
@@ -361,13 +354,14 @@ body{
     width: 100%;
     position: absolute;
     top: 95%;
-    left: 50%;
+    left: 40%;
 }
 
-.formControls input{
+.formControls div{
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 1em;
     outline: none;
+    display: inline-block;
 }
 
 .formNote label{

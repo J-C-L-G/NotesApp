@@ -2,12 +2,8 @@
  * Created by JCLG on 8/28/2015.
  */
 
-//Create the fomat for the note date
-function getDateFormat(){
-    var regex = /([\S\s]+\d\d:\d\d)/;
-    var date = ""+new Date();
-    return date.match(regex)[0];
-}
+var Managers = require('./Managers'),
+    dataManager = Managers.dataManager;
 
 //Methods to work with the note form
 function clearNoteForm(){
@@ -73,6 +69,8 @@ function validateBoundaries(x,y, element){
     //Size of the board
     var maxWidth = dataManager.maxWidth;
     var maxHeight = dataManager.maxHeight;
+    console.log('x: ',x)
+    console.log('y: ',y)
 
     //Identifies if is a note
     if(validateElement(element, "stickyNote")){
@@ -105,4 +103,15 @@ function validateBoundaries(x,y, element){
         }
     }
 }
+
+/*Public API*/
+module.exports = {
+    clearNoteForm : clearNoteForm,
+    hideNoteForm : hideNoteForm,
+    validateForm : validateForm,
+    showNoteForm : showNoteForm,
+    validateElement : validateElement,
+    removeClass : removeClass,
+    validateBoundaries : validateBoundaries
+};
 
