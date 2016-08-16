@@ -71,6 +71,12 @@ body{
     display: inline-block;
 }
 
+.mainMenu .title{
+    font-size: 28px;
+    font-family: 'Indie Flower', cursive;
+    color: white;
+}
+
 /*--------------------- Styles for board div ------------------- */
 
 .board{
