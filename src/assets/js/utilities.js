@@ -69,8 +69,6 @@ function validateBoundaries(x,y, element){
     //Size of the board
     var maxWidth = dataManager.maxWidth;
     var maxHeight = dataManager.maxHeight;
-    console.log('x: ',x)
-    console.log('y: ',y)
 
     //Identifies if is a note
     if(validateElement(element, "stickyNote")){

@@ -65,12 +65,12 @@ function clickHandler(ev) {
 function dragStart(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
     dataManager.elementBeingDragged = dataManager.getElementById(ev.target.id);
-    dataManager.elementBeingDragged.style.opacity = '1';
-    console.log(dataManager.elementBeingDragged);
+    if(validateElement(dataManager.elementBeingDragged,'recycleBin')) {
+      dataManager.elementBeingDragged.style.opacity = '0';
+    }
     if(dataManager.elementBeingDragged) {
         validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
     }
-    console.log("dragstart");
 }
 
 function dragOver(ev) {
@@ -78,18 +78,15 @@ function dragOver(ev) {
     if(dataManager.elementBeingDragged) {
         validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
     }
-    console.log("dragover");
 }
 
 function dragEnd(ev) {
     if(dataManager.elementBeingDragged) {
         dataManager.elementBeingDragged.style.opacity = '1';
-//        validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
         if(validateElement(dataManager.elementBeingDragged,'stickyNote')) {
             noteManager.addNoteToStorage(dataManager.elementBeingDragged);
         }
     }
-    console.log("dragend");
 }
 
 function drop(ev) {
@@ -105,7 +102,6 @@ function drop(ev) {
     }else{
         validateBoundaries(ev.pageX, ev.pageY, dataManager.elementBeingDragged);
     }
-    console.log("drop");
 }
 /*************************** End Drag & Drop    *********************************/
 
@@ -119,7 +115,6 @@ function drop(ev) {
             }
             noteManager.addNoteToStorage(element);
         }
-        //console.log('keyup');
     }
 
 //dblClick event to save the element if is a note
@@ -136,7 +131,6 @@ function dblClick(ev){
         }
         noteManager.addNoteToStorage(element);
     }
-    console.log('dblClick');
 }
 
 

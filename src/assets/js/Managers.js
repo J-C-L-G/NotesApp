@@ -35,13 +35,10 @@ function calculateBoard(){
     var maxHeight = window.getComputedStyle(boardWindow)['height'];
     dataManager.maxWidth = parseFloat(maxWidth.substr(0, maxWidth.length - 2));
     dataManager.maxHeight = parseFloat(maxHeight.substr(0, maxHeight.length - 2));
-    console.log('maxWidth',dataManager.maxWidth);
-    console.log('maxHeight',dataManager.maxHeight);
 }
 
 //function increaseBoard for every 10 notes
 function increaseBoard(multBy){
-    console.log(multBy);
     var body = document.getElementsByTagName('body')[0];
     var maxHeight = window.getComputedStyle(body)['height'];
     dataManager.maxHeight = parseFloat(maxHeight.substr(0, maxHeight.length - 2)) * multBy;
